@@ -1,0 +1,21 @@
+md-toolbar.md-default-theme:not(.md-menu-toolbar), md-toolbar:not(.md-menu-toolbar){
+	background-color: rgba(181,63,128,1);
+}
+.lightblue{
+	background-color: lightblue;
+}
+.lightgreen{
+	background-color: lightgreen;
+}
+.md-button{
+
+    padding-top: 15px;
+    padding-bottom: 15px;
+    padding-left: 100px;
+    padding-right: 100px;
+    margin-top: 0px;
+    margin-left: 0px;
+    margin-right: 0px;
+    margin-bottom: 0px;
+
+}
