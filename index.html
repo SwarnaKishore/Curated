@@ -5,36 +5,40 @@
   <link rel="stylesheet" href="lib/angular-material.min.css">
   <link rel="stylesheet" href="index.css">
 </head>
-<body ng-app="BlankApp" ng-cloak layout="column">
+<body ng-app="starterApp" ng-cloak layout="column" ng-controller="UserController as ul">
   <!--
     Your HTML content here
-  -->   <md-toolbar>
-    <h2>Curated List</h2>
+  -->       <md-toolbar layout="row">
+      <md-button class="menu" hide-gt-sm ng-click="ul.toggleList()" aria-label="Show User List">
+        <md-icon md-svg-icon="menu" ></md-icon>
+      </md-button>
+      <h1>Angular Material - Starter App</h1>
     </md-toolbar>
 
-    <div class="container" layout="row" flex>
 
-            <md-sidenav md-is-locked-open="true" class="lightblue md-whiteframe-4dp">
-                <md-list>
-                  <md-list-item>
-                    <md-button>
-                    sample button
-                    </md-button>
-                  </md-list-item>
-                  <md-list-item>
-                    <md-button>
-                    sample button
-                    </md-button>
-                  </md-list-item>
-                </md-list>
-              </md-sidenav>
+    <div flex layout="row">
 
-            <md-content id="#content" class="lightgreen" flex>
-            content</md-content>
-  
-  </div>
-  
-  
+        <md-sidenav  ng-click="ul.toggleList()" md-is-locked-open="$mdMedia('gt-sm')" md-component-id="left" class="md-whiteframe-z2" >
+          <md-list>
+            <md-list-item ng-repeat="it in ul.users">
+                <md-button ng-click="ul.selectUser(it)" ng-class="{'selected' : it === ul.selected }">
+                  {{it.name}}
+                </md-button>
+            </md-list-item>
+          </md-list>
+        </md-sidenav>
+
+        <md-content flex id="content">
+          <h2>{{ul.selected.name}}</h2>
+          <p>{{ul.selected.content}}</p>
+
+          <md-button class="share" md-no-ink ng-click="ul.makeContact(ul.selected)" aria-label="Share with {{ ul.selected.name }}">
+            <md-icon md-svg-icon="share"></md-icon>
+          </md-button>
+        </md-content>
+
+    </div>
+
   
   
   
@@ -46,15 +50,27 @@
 
   <!-- Angular Material Library -->
   <script src="lib/angular-material.min.js"></script>
+
+    <script src="users/users.js"></script>
+    <script src="users/userController.js"></script>
+    <script src="users/userService.js"></script>
   
   <!-- Your application bootstrap  -->
-  <script type="text/javascript">    
-    /**
-     * You must include the dependency on 'ngMaterial' 
-     */
-    angular.module('BlankApp', ['ngMaterial']);
-  </script>
-  
+      <script type="text/javascript">
+          angular
+              .module('starterApp', ['ngMaterial', 'users'])
+              .config(function($mdThemingProvider, $mdIconProvider){
+                  $mdIconProvider
+                      .icon("menu"       , "users/svg/menu.svg"        , 24)
+                      .icon("share"      , "https://raw.githubusercontent.com/angular/material-start/es5-tutorial/app/assets/svg/share.svg"       , 24)
+                      .icon("google_plus", "users/svg/googlePlus.svg" , 512)
+                      .icon("twitter"    , "users/svg/twitter.svg"     , 512);
+                      $mdThemingProvider.theme('default')
+                          .primaryPalette('brown')
+                          .accentPalette('red');
+              });
+    </script>
+
 </body>
 </html>
 
