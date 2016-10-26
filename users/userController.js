@@ -59,7 +59,7 @@
         $mdBottomSheet.show({
           controllerAs  : "vm",
           templateUrl   : 'contactSheet.html',
-          controller    : [ '$mdBottomSheet', ContactSheetController],
+          controller    : 'ContactSheetController',
           parent        : angular.element(document.getElementById('content'))
         }).then(function(clickedItem) {
           $log.debug( clickedItem.name + ' clicked!');
